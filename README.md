@@ -82,13 +82,14 @@ Or like this:
 ./aptaflow.nf run -c configs/YOUR_CONFIG.config
 ```
 
-There is a default config file below.
-
 
 ### Config Files
 
+Make sure to stick to the config file below and change only necessary variables,
+such as the round names, data location, random region length and so on.
+
+There are also the config files used in our research for reproducibility.
 ```
-// Parameters for nextflow script 2019_12_08.selex_analysis.nf
 params {
 
     // Provide a selex name for the output directory
