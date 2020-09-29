@@ -36,17 +36,13 @@ Next a conda environment, in which the dependencies will be installed, is create
 ```
 # Creating conda environment
 conda create --name aptaflow
-
-# Updating conda aptaflow environment
-conda update -n aptaflow
-
 ```
 
 Activate the environment and install the dependencies.
 ```
 conda activate aptaflow
-conda install -c bioconda -c conda-forge nextflow cutadapt fastp multiqc pandas
-conda install -c r r-base r-dplyr r-tidyr r-ggplot2 bioconductor-biostrings r-xlsx r-argparse  
+conda install -c bioconda -c conda-forge nextflow=19.10.0 cutadapt=2.4 fastp=0.20.0 multiqc=1.9 pandas=1.1.0
+conda install -c r r-base=3.6.1 r-dplyr=0.8.0.1 r-tidyr=0.8.3 r-ggplot2=3.1.1 r-xlsx=0.6.1 r-argparse=2.0.1 r-showtext=0.9
 ```
 
 Packages used:
@@ -54,24 +50,35 @@ Packages used:
 - nextflow 19.10.0.5170
 - cutadapt 2.4
 - fastp 0.20.0
-- multiqc v1.9
-- pandas (python)
-- dplyr (r)
-- tidyr (r)
-- ggplot2 (r)
-- bioconductor-biostrings (r)
-- xlsx (r)
-- argparse (r)
-
+- multiqc 1.9
+- pandas 1.1.0
+- dplyr 0.8.0.1
+- r-base 3.6.1
+- r-tidyr 0.8.3
+- r-ggplot2 3.1.1
+- r-xlsx 0.6.1
+- r-argparse 2.0.1
+- r-showtext 0.9
 
 We had problems using the workflow on a fresh install of Linux (OpenSUSE) due to the xlsx-package using rJava.
 For it to properly work the environment variable LD_LIBRARY_PATH has to be set.
 ```
-export LD_LIBRARY_PATH=$JAVA_HOME/lib:$JAVA_HOME/lib/server
+export LD_LIBRARY_PATH='$JAVA_HOME/lib:$JAVA_HOME/lib/server';
 ```
 Be sure that $JAVA_HOME is pointing at your java install directory.
+You can check by echoing the $JAVA_HOME global variable:
+```
+echo $JAVA_HOME
+```
 
 ### Running the workflow
+Make sure that the scripts in bin/ are executable.
+These scripts are called from within the aptaflow.nf script.
+
+If they are not executable, use this command to make them executable.
+```
+chmod +x bin/*
+```
 
 Execute the pipeline like this:
 ```

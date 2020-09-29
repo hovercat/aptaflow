@@ -6,6 +6,8 @@ library("dplyr")
 library("tools")
 library("tidyr")
 library("ggplot2")
+library("showtext")
+showtext_auto()
 
 viridis_colorpalette="plasma"
 
@@ -35,7 +37,10 @@ gg <- ggplot(data=df_content_g, mapping = aes(x=round, y=perc, fill=factor(nt)))
 ggsave(
   "selex_acgt_bargraph.tiff",
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()
 
@@ -55,6 +60,9 @@ gg <- ggplot(data=df_content_g, mapping = aes(x=as.numeric(factor(round)), y=per
 ggsave(
   "selex_acgt_area.tiff",
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()

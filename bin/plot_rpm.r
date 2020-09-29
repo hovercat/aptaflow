@@ -3,6 +3,8 @@ library("dplyr")
 library("tools")
 library("tidyr")
 library("ggplot2")
+library("showtext")
+showtext_auto()
 
 args = commandArgs(trailingOnly=TRUE)
 
@@ -39,7 +41,10 @@ gg <- ggplot(data=df_plot, mapping = aes(x=round, y=perc, fill=factor(exponent))
 ggsave(
   paste(out_dir, "round_composition_rpm_bar.tiff", sep="/"),
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()
 
@@ -60,7 +65,10 @@ gg <- ggplot(df_plot, aes(x=as.numeric(factor(round)), y=perc, fill=factor(expon
 ggsave(
   paste(out_dir, "round_composition_rpm_hist.tiff", sep="/"),
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()
 
@@ -81,7 +89,10 @@ gg <- ggplot(data=df_plot, mapping = aes(x=round, y=perc, group=factor(exponent)
 ggsave(
   paste(out_dir, "round_composition_rpm_lines.tiff", sep="/"),
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()
 
@@ -101,6 +112,9 @@ gg <- ggplot(data=df_plot, mapping = aes(x=round, y=perc, group=factor(exponent)
 ggsave(
   paste(out_dir, "round_composition_rpm_lines_ylog10.tiff", sep="/"),
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()

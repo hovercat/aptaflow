@@ -3,6 +3,8 @@ library("dplyr")
 library("tools")
 library("tidyr")
 library("ggplot2")
+library("showtext")
+showtext_auto()
 
 args = commandArgs(trailingOnly=TRUE)
 
@@ -35,6 +37,9 @@ gg <- ggplot(
 ggsave(
   out_tiff,
   plot=gg,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()

@@ -5,6 +5,8 @@ args = commandArgs(trailingOnly=TRUE)
 library("dplyr")
 library("tools")
 library("tidyr")
+library("showtext")
+showtext_auto()
 
 # PLOTTING DEFAULTS
 library("ggplot2")
@@ -32,6 +34,9 @@ gg_nt_content <- ggplot(data=df_content_g, mapping = aes(x=factor(nt_position, o
 ggsave(
   args[2],
   plot=gg_nt_content,
-  device=tiff()
+  device=tiff(),
+  width=8,
+  height=8,
+  units="cm"
 )
 dev.off()
