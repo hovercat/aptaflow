@@ -97,41 +97,32 @@ such as the round names, data location, random region length and so on.
 
 There are also the config files used in our research for reproducibility.
 ```
+// Parameters for nextflow script aptaflow.nf
 params {
 
     // Provide a selex name for the output directory
-    selex_name = "SELEX_NAME"
+    selex_name = "EF05"
 
     // provide rounds in sorted order
-    // files have to start with these prefixes
     rounds=["R00", "R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11"]
 
     // random region length
     n=40
 
-    // Input
+    // I/O
     input {
-        // Location of your data
-        raw_reads = 'DATA_LOCATION/*{R1,R2}.fastq'
-        
-        // Suffixes of forward and reverse files
-        // Below on the example of 'R00_R1.fastq' and 'R00_R2.fastq'
-        fwd_suffix="R1.fastq"
-        rev_suffix="R2.fastq"
-        
-        // The delimiter is used to split between round name and suffix
-        round_delimiter = "_"
+        raw_reads = 'data/*{R1,R2}_001.fastq'
+        fwd_suffix="_L001_R1_001.fastq"
+        rev_suffix="_L001_R2_001.fastq"
+        round_delimiter = "_" // Will be cleaved e.g. R0_XYZ.fastq -> R0
     }
-    // Output
     output {
-        // If no out_dir is provided (null) a default output directory will be created
         out_dir = null
     }
 
     // System Specs
     specs {
-        // Maximum number of CPUs to use
-        cpus = 4
+        cpus = 24
     }
 
     // Primers
@@ -143,26 +134,29 @@ params {
     }
 
     // Trimming
-    // These default values work well for N40 length, best to leave them.
     cutadapt {
         action = "trim"
         max_error = 0.2
-        check_primer_contamination = false // non functional
+        check_primer_contamination = false
         primer_contamination {
             max_error = 0.1
             min_overlap = 12
         }
-        
-        // Please provide here again the length of the N region and primer lenghts
         N = 40
         primer_length = 23
-        // How much may the sequence length differ? N+-max_deviation
         max_deviation = 3
     }
 
     // Filtering and Merging
     fastp {
-        filter_min_phred = 30
+        filter_min_phred = 30    
+    }
+    
+    // ViennaRNA (Currently not activated)
+    vienna_rna {
+    	T=21
+    	mathews2004="VIENNA_RNA/misc/dna_mathews2004.par"
+        for_top=10 // percent [0.00 - 100.00] of every round
     }
 }
 ```
