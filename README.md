@@ -1,3 +1,9 @@
+More stable/robust pipeliens doing the things below are here:
+- Data Preprocessing: https://github.com/hovercat/selex-ngs-prep
+- Basic Analysis: https://github.com/hovercat/selex-assess
+- K-mer socre based enrichment testing: https://github.com/hovercat/selex-kmer
+- Clustering using blast similarity graph: https://github.com/hovercat/selex-blaster (works so so)
+
 # AptaFlow for HT-SELEX NGS Data
 
 This is the bioinformatic pipeline used for the Analysis of *Enterococcus faecalis*, performed in 2020 at TU Wien, Austria.
